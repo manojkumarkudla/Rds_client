@@ -76,6 +76,14 @@ cidr_block = "192.168.3.0/24"
 availability_zone = "eu-west-1b"
 }
 
+resource "aws_subnet" "publicsubnet" {
+  vpc_id     = aws_vpc.db_vpc.id
+  cidr_block = "192.168.1.0/24"
+
+  tags = {
+    Name = "public_subnet"
+  }
+}
 resource "aws_db_subnet_group" "db-subnet" {
 name = "db subnet group"
 subnet_ids = ["${aws_subnet.priv-subnet1.id}", "${aws_subnet.priv-subnet2.id}"]
